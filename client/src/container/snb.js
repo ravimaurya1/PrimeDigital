@@ -1,5 +1,7 @@
 import React,{useEffect} from 'react';
 import {connect} from 'react-redux';
+import Search from '../component/searchBar';
+import './snbStyle.css';
 
 
 const SNB  = (props) =>{
@@ -7,11 +9,12 @@ const SNB  = (props) =>{
         props.testFunc();
     }
     return (
-        <>
+        <div className='snbContainer'>
+            <Search />
             <div>SNB page</div>
             <button onClick={onClickHandler}>Click me </button>
             <div>{props.test}</div>
-        </>
+        </div>
     );
 }
 
