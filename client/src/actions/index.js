@@ -20,7 +20,7 @@ export const SearchAction = (filter) =>{
 
         const result = await axios.get(url);
 
-        dispatch({type:'searchResult',payload:result.da});
+        dispatch({type:'searchResult',payload:result.data});
     }
 }
 

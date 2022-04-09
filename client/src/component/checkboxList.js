@@ -7,13 +7,7 @@ const FilterWrapper = styled.div`
 
 `;
 
-const extractKey = (data) =>{
-    let filterKey = {};
-    for(let i = 0; i< data.length;i++){
-        filterKey[data[i].id] = false;
-    }
-    return filterKey ;
-}
+
 
 const extractFilter = (filter) =>{
     const filters = filter.split('_');
@@ -24,19 +18,22 @@ const CheckBoxes = ({filters,filtername,FetchResult}) =>{
     const isInitialMount = useRef(true);
     let [searchParams, setSearchParams] = useSearchParams();
     const data = useSelector((state) => state.FilterResult[`${filtername}s`]);
+    const extractKey = (data) =>{
+        let filterKey = {};
+        for(let i = 0; i< data.length;i++){
+            filterKey[data[i].id] = false;
+        }
+        if(searchParams.get(filtername)){
+            const data = extractFilter(searchParams.get(filtername));
+            for(let i =0;i<=data.length;i++){
+                filterKey[data[i]] = true;
+            }
+        }
+        return filterKey;
+    }
     const filterKey = extractKey(data);
     const [filterState,setFilterState] = useState(filterKey);
 
-    useEffect(() =>{
-        if(searchParams.get(filtername)){
-            const data = extractFilter(searchParams.get(filtername));
-            let newFilter = {...filterState}
-            for(let i =0;i<=data.length;i++){
-                newFilter[data[i]] = true;
-            }
-            setFilterState(newFilter);
-    }
-    },[]); 
 
     useEffect(() =>{
         if(isInitialMount.current) {
