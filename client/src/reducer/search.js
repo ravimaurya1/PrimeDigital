@@ -1,9 +1,9 @@
-const test =(state=[],action) =>{
-    if(action.type === 'test'){
-        return [1,2,3];
+const Search =(state=[],action) =>{
+    if(action.type === 'searchResult'){
+        return action.payload;
     }else{
         return state;
     }
 }
 
-export default test;
+export default Search;
