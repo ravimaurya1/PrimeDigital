@@ -1,0 +1,1 @@
+export const ServerHost = 'http://localhost:3001';
