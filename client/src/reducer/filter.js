@@ -1,3 +1,5 @@
+// To fetch filter result
+
 const FilterResult = (state = {}, action) =>{
     if(action.type === 'filterResult'){
         return action.payload;

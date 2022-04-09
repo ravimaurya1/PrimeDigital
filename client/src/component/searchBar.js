@@ -1,13 +1,21 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import SearchBar,{SearchIcon} from 'material-ui-search-bar';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {SearchAction} from '../actions/index';
+import { useSearchParams } from "react-router-dom";
 
 
 const Search = (props) =>{
-    const [searchText, setSearchText] = useState('');
+    const [searchText, setSearchText] = useState(props.searchText);
+    let [searchParams, setSearchParams] = useSearchParams();
+    const dispatch = useDispatch();
     const requestSearch = () =>{
-        props.SearchAction(searchText);
+        if(searchText){
+        searchParams.set('q',searchText);
+        setSearchParams(searchParams);
+        props.FetchResult(searchText);
+        }
     }
 
     return (
@@ -19,8 +27,4 @@ const Search = (props) =>{
     );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    SearchAction: (text) => dispatch(SearchAction(text))
-})
-
-export default connect(null,mapDispatchToProps)(Search);
+export default Search;

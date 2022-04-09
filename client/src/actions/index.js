@@ -1,9 +1,36 @@
 import axios from 'axios';
+import {ServerHost} from '../config';
 
-export const SearchAction = (text) =>{
+
+export const SearchAction = (filter) =>{
+
+    let url = new URL(`${ServerHost}/planets`);
+    let filtersKey = Object.keys(filter);
+    filtersKey.forEach((key) =>{
+        if(key === 'q'){
+            url.searchParams.append('q',filter[key]);
+        }else{
+            let filters = filter[key].split('_');   // Filters can be seperate with _
+            filters.forEach((item) =>{
+                url.searchParams.append(key,item);
+            });
+        }
+    })
     return async (dispatch) => {
-        const result = await axios.get(`http://localhost:3001/planets/?q=${text}`);
-        dispatch({type:'searchResult',payload:result.data});
+
+        const result = await axios.get(url);
+
+        dispatch({type:'searchResult',payload:result.da});
     }
 }
+
+export const FilterAction = () =>{
+    return async(dispatch) =>{
+        const colors = await axios.get(`${ServerHost}/colors`);
+        const shapes = await axios.get(`${ServerHost}/shapes`);        
+        const sizes = await axios.get(`${ServerHost}/sizes`);        
+        dispatch({type:'filterResult',payload:{colors: colors.data,shapes:shapes.data,sizes:sizes.data}});
+    }
+}
+
 
