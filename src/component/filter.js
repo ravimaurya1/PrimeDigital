@@ -19,7 +19,7 @@ const Filters = styled.div `
     flex-direction: column;
 `;
 
-const Filter = ({FetchResult}) => {
+const Filter = () => {
     let [searchParams, setSearchParams] = useSearchParams();
     const filterResult = useSelector((state) => state.FilterResult);
 
@@ -33,7 +33,7 @@ const Filter = ({FetchResult}) => {
                             filterResult[element]
                         }
                         filtername={filtername}
-                        FetchResult={FetchResult}/>
+                    />
                 </div>);
             })
         } </Filters>

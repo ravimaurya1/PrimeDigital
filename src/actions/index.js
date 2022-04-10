@@ -3,6 +3,7 @@ import {ServerHost} from '../config';
 
 
 export const SearchAction = (filter) => {
+    if(Object.keys(filter).length > 0){
     let url = new URL(`${ServerHost}/planets`);
     let filtersKey = Object.keys(filter);
     filtersKey.forEach((key) => {
@@ -18,6 +19,13 @@ export const SearchAction = (filter) => {
     return async (dispatch) => {
         const result = await axios.get(url);
         dispatch({type: 'searchResult', payload: result.data});
+    }
+    }
+    else{
+        return ({
+            type: 'searchResult',
+            payload: []
+        });
     }
 }
 

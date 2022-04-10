@@ -19,9 +19,12 @@ const Search = (props) => {
         if (searchText) {
             searchParams.set('q', searchText);
             setSearchParams(searchParams);
-            props.FetchResult(searchText);
         }
     }
+
+    useEffect(() => {
+        setSearchText(props.searchText);
+    },[props.searchText])
 
     return (<SearchBarWrapper>
         <SearchBar value={searchText}

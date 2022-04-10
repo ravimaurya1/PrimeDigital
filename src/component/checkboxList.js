@@ -12,8 +12,9 @@ const extractFilter = (filter) => {
     return filters;
 }
 
-const CheckBoxes = ({filters, filtername, FetchResult}) => {
+const CheckBoxes = ({filters, filtername}) => {
     const isInitialMount = useRef(true);
+    const location = useLocation();
     let [searchParams, setSearchParams] = useSearchParams();
     const data = useSelector((state) => state.FilterResult[`${filtername}s`]);
     const extractKey = (data) => {
@@ -32,15 +33,17 @@ const CheckBoxes = ({filters, filtername, FetchResult}) => {
     const filterKey = extractKey(data);
     const [filterState, setFilterState] = useState(filterKey);
 
-    // Running FetchResult only when filterState Changes, not on intial render
-    useEffect(() => {                                      
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-        } else {
-            FetchResult();
+    useEffect(() =>{
+        let filterKey = {...filterState};
+        Object.keys(filterKey).forEach((key) =>filterKey[key]=false);
+        if (searchParams.get(filtername)) {
+            const data = extractFilter(searchParams.get(filtername));
+            for (let i = 0; i <= data.length; i++) {
+                filterKey[data[i]] = true;
+            }
         }
-    }, [filterState])
-
+        setFilterState(filterKey);
+    },[location])
 
     const HandleChange = (e) => {
         if (e.target.checked) {

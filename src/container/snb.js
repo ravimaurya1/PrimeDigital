@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import Search from '../component/searchBar';
 import Result from '../component/results';
-import {useSearchParams} from "react-router-dom";
+import {useSearchParams, useLocation} from "react-router-dom";
 import Filter from '../component/filter';
 import styled from 'styled-components';
 import {useDispatch, useSelector} from 'react-redux';
@@ -35,8 +35,9 @@ const Wrapper = styled.div `
 const SNB = (props) => {
     let [searchParams, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
+    const location = useLocation();
     const filterResult = useSelector((state) => state.FilterResult);
-    const searchText = searchParams.get('q');
+    let searchText = searchParams.get('q');
 
     const FetchResult = (searchText) => {
         let filterObj = {};
@@ -44,26 +45,29 @@ const SNB = (props) => {
             const [param, value] = entry;
             filterObj[param] = value;
         }
-        if (searchText) {
-            filterObj['q'] = searchText;
-        }
-        if (Object.keys(filterObj).length > 0)  // Cally  only when there is any filter
-            dispatch(SearchAction(filterObj));
+        // if (searchText) {
+        //     filterObj['q'] = searchText;
+        // }  // Cally  only when there is any filter
+        dispatch(SearchAction(filterObj));
         
     }
 
-    useEffect(() => {
+    useEffect(() =>{
         dispatch(FilterAction());
+    },[])
+
+    useEffect(() => {
         FetchResult();
-    }, [])
+        searchText = searchParams.get('q');
+    }, [location])
 
     return (<SnbContainer>
         <Search searchText={
-                searchText ? searchText : ''
+                (searchText || searchText ==='')? searchText : ''
             }
-            FetchResult={FetchResult}/>
+            />
         <Wrapper> {
-            (Object.keys(filterResult).length > 0) ? <Filter FetchResult={FetchResult}/> : null
+            (Object.keys(filterResult).length > 0) ? <Filter /> : null
         }
             <Result/>
         </Wrapper>
