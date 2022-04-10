@@ -1,1 +1,1 @@
-export const ServerHost = 'http://localhost:3001';
+export const ServerHost = process.env.NODE_ENV === 'development' ?'http://localhost:3001':`${window.location.origin}`;
