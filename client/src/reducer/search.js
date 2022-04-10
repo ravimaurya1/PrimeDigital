@@ -1,7 +1,7 @@
-const Search =(state=[],action) =>{
-    if(action.type === 'searchResult'){
+const Search = (state = [], action) => {
+    if (action.type === 'searchResult') {
         return action.payload;
-    }else{
+    } else {
         return state;
     }
 }

@@ -1,8 +1,5 @@
-import { combineReducers } from "redux";
+import {combineReducers} from "redux";
 import SearchResult from './search';
 import FilterResult from './filter';
 
-export default combineReducers({
-    SearchResult,
-    FilterResult
-});
+export default combineReducers({SearchResult, FilterResult});
