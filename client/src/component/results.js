@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import Card from './resultCard';
 
 const ResultContainer = styled.div`
     width: 80%;
@@ -12,14 +13,13 @@ const Result = () =>{
     return (
         <ResultContainer>
             {
-                SearchResult.map((data) =>{
+                SearchResult.map((data,index) =>{
                     return (
-                        <div className='card'>
-                            {data.name}
-                        </div>
+                        <Card title={data.name} key={index}/>
                     );
                 })
             }
+            {SearchResult.length === 0 ? <h4>No Result Found</h4>: null}
         </ResultContainer>
 
     );
