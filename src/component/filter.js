@@ -5,9 +5,9 @@ import {useSearchParams, useLocation} from "react-router-dom";
 import CheckBoxes from './checkboxList';
 
 const FilterWrapper = styled.div `
-    width: 20% ;
+    width: 25% ;
     height: 100% ;
-    border-right: 1px solid grey ;
+    border-right: 1px solid #E6E3E2;
     @media only screen and (max-width: 600px) {
         font-size:10px;
         padding-right:15px;

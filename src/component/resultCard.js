@@ -10,7 +10,7 @@ const Card = ({title, description}) => {
     return (<CardWrapper>
         <h4> {title}</h4>
         <p> {description}</p>
-        <hr/>
+        <hr style={{border:'1px solid #E6E3E2'}}/>
     </CardWrapper>);
 }
 

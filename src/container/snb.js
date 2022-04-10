@@ -14,8 +14,8 @@ const SnbContainer = styled.div `
     margin-left: 10%;
     margin-right: 10%;
     height: 100vh;
-    border-left:1px solid grey;
-    border-right: 1px solid grey;
+    border-left:1px solid #E6E3E2;
+    border-right: 1px solid #E6E3E2;
     padding:20px;
     @media only screen and (max-width: 790px) {
         font-size:12px;
