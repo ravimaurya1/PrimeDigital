@@ -32,8 +32,8 @@ const CheckBoxes = ({filters, filtername, FetchResult}) => {
     const filterKey = extractKey(data);
     const [filterState, setFilterState] = useState(filterKey);
 
-
-    useEffect(() => {
+    // Running FetchResult only when filterState Changes, not on intial render
+    useEffect(() => {                                      
         if (isInitialMount.current) {
             isInitialMount.current = false;
         } else {
@@ -82,7 +82,7 @@ const CheckBoxes = ({filters, filtername, FetchResult}) => {
     }
     return (<FilterWrapper> {
         filters.map((filter, index) => {
-            return (<div>
+            return (<div key={index}>
                 <input type="checkbox"
                     data-id={
                         filter.id

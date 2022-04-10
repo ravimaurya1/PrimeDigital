@@ -25,9 +25,9 @@ const Filter = ({FetchResult}) => {
 
     return (<FilterWrapper>
         <Filters> {
-            Object.keys(filterResult).map(element => {
+            Object.keys(filterResult).map((element,index) => {
                 let filtername = element.slice(0, -1);
-                return (<div>
+                return (<div key={index}>
                     <h4> {element}</h4>
                     <CheckBoxes filters={
                             filterResult[element]
