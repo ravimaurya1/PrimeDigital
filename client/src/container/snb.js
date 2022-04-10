@@ -13,6 +13,17 @@ const SnbContainer = styled.div`
     width: 70%;
     margin-left: 10%;
     margin-right: 10%;
+    height: 100vh;
+    border-left:1px solid grey;
+    border-right: 1px solid grey;
+    padding:20px;
+    @media only screen and (max-width: 790px) {
+        font-size:12px;
+  }
+  @media only screen and (max-width: 600px) {
+        font-size:10px;
+        padding:15px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -34,7 +45,7 @@ const SNB  = (props) =>{
             filterObj[param] = value;
         }
         if(searchText){
-            filterObj['p'] = searchText;
+            filterObj['q'] = searchText;
         }
         if(Object.keys(filterObj).length > 0)           //Cally  only when there is any filter
             dispatch(SearchAction(filterObj));

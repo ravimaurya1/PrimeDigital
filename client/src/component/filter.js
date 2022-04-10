@@ -6,6 +6,12 @@ import CheckBoxes from './checkboxList';
 
 const FilterWrapper = styled.div`
     width: 20% ;
+    height: 100% ;
+    border-right: 1px solid grey ;
+    @media only screen and (max-width: 600px) {
+        font-size:10px;
+        padding-right:15px;
+    }
 `;
 
 const Filters = styled.div`
@@ -19,7 +25,6 @@ const Filter = ({FetchResult}) => {
     
     return (
         <FilterWrapper>
-            Filters
             <Filters>
                 {Object.keys(filterResult).map(element => {
                     let filtername = element.slice(0, -1);
